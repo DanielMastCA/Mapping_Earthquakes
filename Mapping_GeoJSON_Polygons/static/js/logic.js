@@ -22,7 +22,7 @@ let baseMaps = {
 let map = L.map('mapid', {
     center: [43.7, -79.3],
     zoom: 11,
-    layers: [satelliteStreets]
+    layers: [streets]
 })
 
 // Pass our map layers into our layers control and add the layers control to the map.
@@ -33,8 +33,9 @@ let torontoData = "https://raw.githubusercontent.com/DanielMastCA/Mapping_Earthq
 
 // Create a style for the lines.
 let myStyle = {
-    color: "#ffffa1",
-    weight: 2
+    color: "blue",
+    weight: 1,
+    fillColor: "yellow"
 }
 
 // Grabbing our GeoJSON data.
@@ -44,8 +45,9 @@ d3.json(torontoData).then(function (data) {
     L.geoJSON(data, {
         style: myStyle,
         onEachFeature: function (feature, layer) {
-            layer.bindPopup("<h3>" + "Airline: " + feature.properties.airline + "</h3>" + "<hr>"
-                + "<h3>" + "Destination: " + feature.properties.dst + "</h3>");
+            layer.bindPopup("<h2>" + "Neighbourhood" + "</h2>"
+                + "<hr>"
+                + "<h3>" + feature.properties.AREA_NAME + "</h3>");
         }
     }).addTo(map);
 });
